@@ -7,8 +7,9 @@ Example:
     $ python app.py
 """
 import sys
-import fire
-import questionary
+import csv
+# import fire
+# import questionary
 from pathlib import Path
 
 from qualifier.utils.fileio import load_csv
@@ -23,7 +24,16 @@ from qualifier.filters.credit_score import filter_credit_score
 from qualifier.filters.debt_to_income import filter_debt_to_income
 from qualifier.filters.loan_to_value import filter_loan_to_value
 
+# added function save_csv. Saves data in to the csv file 
+def save_csv(data, csvpath):
+    with open(csvpath, "w") as csvfile:
+        csvwriter = csv.writer(csvfile, delimiter=",")
 
+        # Read the CSV data
+        for row in data:
+            csvwriter.writerow(row)
+# 
+#            
 def load_bank_data():
     """Ask for the file path to the latest banking data and load the CSV file.
 
